@@ -1,11 +1,14 @@
 let today = moment().format("dddd[,] MMMM do");
-let hours = $("[data-hour]");
+let hours = $("textarea");
 let now = moment().hour();
 let tasks = [];
+let buttons = $(".saveBtn");
 let tArea;
+let taskTime;
+let taskContent;
 
 // Event Listener for save buttons
-//$(".saveBtn").click(saveTask);
+$(".saveBtn").click(saveTask);
 
 //sets and displays current date
 $("#currentDay").text(today);
@@ -21,21 +24,33 @@ $("textarea").each(function (index) {
     };
 });
 
-// getTask();
-// function getTask() {
-//     var storedTasks = JSON.parse(localStorage.getItem("tasks"));
+getTask();
+function getTask() {
+    var storedTasks = JSON.parse(localStorage.getItem("tasks"));
 
-//     if (storedScores !== null) {
-//         tasks = storedTasks;
-//     }
-// };
+    if (storedTasks !== null) {
+        tasks = storedTasks;
+    }
+};
 
-//function will save task when save button is clicked
-// function saveTask(event) {
-//     event.preventDefault();
+console.log(buttons);
 
-//     localStorage.setItem();
-// };
+// will save task when save button is clicked
+function saveTask(event) {
+    event.preventDefault();
+    taskTime = event.target.dataset.hour;
+    console.log(taskTime);
+    taskContent = $(event.target.previousElementSibling).val();
+    console.log(taskContent);
+
+     addEntry(taskTime, taskContent);
+     localStorage.setItem("tasks", JSON.stringify(tasks));
+};
+
+function addEntry(taskTime, taskContent) {
+    tasks.push({ taskTime, taskContent });
+    console.log(tasks)
+};
 
 // this code is from another project to copy over
 // function saveScore(event) {
