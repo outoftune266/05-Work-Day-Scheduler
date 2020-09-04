@@ -13,8 +13,8 @@ $(".saveBtn").click(saveTask);
 //sets and displays current date
 $("#currentDay").text(today);
 
-$("textarea").each(function (index) {
-    tArea = this
+$("textarea").each(function () {
+    tArea = this;
     if (parseInt(tArea.dataset.hour) < now) {
         $(tArea).addClass("past");
     } if (parseInt(tArea.dataset.hour) === now) {
@@ -24,6 +24,7 @@ $("textarea").each(function (index) {
     };
 });
 
+//retrieves stored tasks from local storage
 getTask();
 function getTask() {
     var storedTasks = JSON.parse(localStorage.getItem("tasks"));
@@ -33,7 +34,23 @@ function getTask() {
     }
 };
 
-console.log(buttons);
+//displays saved tasks
+displayTasks();
+function displayTasks() {
+    for (var i = 0; i < tasks.length; i++) {
+        let find = tasks[i].taskTime;
+        let content = tasks[i].taskContent
+        $("textarea").each(function() {
+            tArea = this;
+            console.log(this.id);
+            if (tArea.id === find) {
+                tArea.innerHTML = content;
+            };
+        });
+    };
+};
+
+
 
 // will save task when save button is clicked
 function saveTask(event) {
@@ -51,19 +68,5 @@ function addEntry(taskTime, taskContent) {
     tasks.push({ taskTime, taskContent });
     console.log(tasks)
 };
-
-// this code is from another project to copy over
-// function saveScore(event) {
-//     event.preventDefault();
-//     playerInitials = initialsBox.value;
-//     playerInitials = playerInitials.toUpperCase();
-
-//     addEntry(totalScore, playerInitials);
-
-
-//     localStorage.setItem("leaderboardEntries", JSON.stringify(leaderboardEntries));
-//     generateTable();
-//     leaderboardInput.className = "hidden";
-// };
 
 
