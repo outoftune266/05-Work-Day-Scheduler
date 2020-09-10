@@ -50,8 +50,6 @@ function displayTasks() {
     };
 };
 
-
-
 // will save task when save button is clicked
 function saveTask(event) {
     event.preventDefault();
