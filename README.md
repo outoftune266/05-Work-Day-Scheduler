@@ -32,3 +32,6 @@ Libraries Used:
 - Bootstrap:   [Website](https://getbootstrap.com/)
 - JQuery: [Website](https://materializecss.com/)
 - Font Awesome: [Website](https://fontawesome.com/)
+
+License: 
+- MIT
